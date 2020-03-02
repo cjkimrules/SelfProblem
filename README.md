@@ -1,4 +1,4 @@
-## SelfProblem
+## Self Problems
 
 ### This is where I just find something that could be fun to solve in programming.
 

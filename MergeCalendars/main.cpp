@@ -1,7 +1,7 @@
 /******************************************************************************
 Author: CJ Kim
 Date: 3/2/2020
-Title: Next Permutation
+Title: Merge Calendars
 Explain: Imagine two people want to find a good time to have a meeting.
          They would like to find that good time slot by comparing both people's
          calendars.

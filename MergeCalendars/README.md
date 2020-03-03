@@ -8,3 +8,8 @@ Flipping "Occupied Time Slots" into "Available Time Slots" makes it simpler to t
 especially with "Daily Bounds" which could also be treated as an available time slot.
 
 Thinking the solution out wasn't hard, but programming was a bit time consuming.
+
+
+Problem Found Here:
+
+https://www.youtube.com/watch?v=3Q_oYDQ2whs

@@ -31,27 +31,29 @@ Explain: Imagine two people want to find a good time to have a meeting.
 
 using namespace std;
 
-// Time Complexity is (Number of Schedules of Person A) * (Number of Schedules of Person B)
-//
-// Time Complexity cannot be A * Log(B), using binary search to find the appropriate time slot to merge.
-// Because, this is not a one-to-one merge. This is not, I found the time slot and that is it.
-// Person A: [9:00, 15:00]
-// Person B: [10:00, 11:00], [13:00, 14:30]
-// MinTime : 30 minutes
-// Output  : [10:00, 11:00], [13:00, 14:30]
-// Like this example, one time slot can "merge" with multiple of other's time slots.
-// Techincally, this is one-to-all merge. That's why we have to loop through every other slots for each slot.
-//
-// Now you may wonder what if I delete the ones that were used for merging. Then it could be A + B time.
-// This is also not possible, because consider this example now.
-// Person A: [10:00, 13:00], [14:00, 16:30]
-// Person B: [12:00, 15:00]
-// MinTime : 30 minutes
-// Output  : [12:00, 13:00], [14:00, 15:00]
-// If we were to "remove" the time slot because we used it to merge, then after merging
-// [10:00, 13:00] and [12:00, 15:00] into [12:00, 13:00], [12:00, 15:00] will be removed.
-// But we may still need it for the next time slot, [14:00, 16:30]. In fact, we do.
-// So we can't delete the time slot after merging either.
+/*
+ * Time Complexity is (Number of Schedules of Person A) * (Number of Schedules of Person B)
+ *
+ * Time Complexity cannot be A * Log(B), using binary search to find the appropriate time slot to merge.
+ * Because, this is not a one-to-one merge. This is not, I found the time slot and that is it.
+ * Person A: [9:00, 15:00]
+ * Person B: [10:00, 11:00], [13:00, 14:30]
+ * MinTime : 30 minutes
+ * Output  : [10:00, 11:00], [13:00, 14:30]
+ * Like this example, one time slot can "merge" with multiple of other's time slots.
+ * Techincally, this is one-to-all merge. That's why we have to loop through every other slots for each slot.
+ *
+ * Now you may wonder what if I delete the ones that were used for merging. Then it could be A + B time.
+ * This is also not possible, because consider this example now.
+ * Person A: [10:00, 13:00], [14:00, 16:30]
+ * Person B: [12:00, 15:00]
+ * MinTime : 30 minutes
+ * Output  : [12:00, 13:00], [14:00, 15:00]
+ * If we were to "remove" the time slot because we used it to merge, then after merging
+ * [10:00, 13:00] and [12:00, 15:00] into [12:00, 13:00], [12:00, 15:00] will be removed.
+ * But we may still need it for the next time slot, [14:00, 16:30]. In fact, we do.
+ * So we can't delete the time slot after merging either.
+ */
 
 // Using Daily Bounds and Occupied Slots, find all the Available Time Slots.
 vector<TimeSlot>* FindAvailSlots(TimeSlot const& DailyBound, vector<TimeSlot> const& OccupiedSlots){

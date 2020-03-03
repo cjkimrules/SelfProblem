@@ -13,3 +13,5 @@ Thinking the solution out wasn't hard, but programming was a bit time consuming.
 Problem Found Here:
 
 https://www.youtube.com/watch?v=3Q_oYDQ2whs
+
+PS. Note that I paused the video after seeing the problem, so I do not know how the mock interviewee solved this problem in the video. In fact, I'm going to finish watching it now! Enjoy.

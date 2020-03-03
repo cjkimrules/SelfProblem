@@ -68,7 +68,7 @@ vector<TimeSlot>* CombineSorted(vector<TimeSlot>& a, vector<TimeSlot>& b){
 // There will be time slots where end time overlaps with other time slot.
 // Combine properly and finalize all time slots.
 void ArrangeSortedTimeSlots(vector<TimeSlot>* combined){
-    
+    // NOT FINISHED
 }
 
 bool TimeFitsInBound(Time start, Time end, int TimeInMinutes){

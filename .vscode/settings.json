@@ -3,6 +3,10 @@
         "xstring": "cpp",
         "vector": "cpp",
         "xutility": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "map": "cpp",
+        "chrono": "cpp",
+        "ostream": "cpp"
     }
 }

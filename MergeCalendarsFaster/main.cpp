@@ -37,9 +37,12 @@ using namespace std;
  * The reason that there could've been an upgrade is that we are not merging at all.
  * I was too stuck to the concept of "Merging Free Time Slots".
  * All we had to do was combine occupied time slots together in sorted manner and flip them
- * within the Daily Bounds.
+ * within the Daily Bounds to Available Slots.
  */
 
+
+// Here we combine to sorted TimeSlot arrays into one sorted array.
+// They are sorted by StartTime of each TimeSlot.
 vector<TimeSlot>* CombineSorted(vector<TimeSlot>& a, vector<TimeSlot>& b){
     vector<TimeSlot>* Combined = new vector<TimeSlot>();
 
@@ -65,8 +68,10 @@ vector<TimeSlot>* CombineSorted(vector<TimeSlot>& a, vector<TimeSlot>& b){
     return Combined;
 }
 
-// There will be time slots where end time overlaps with other time slot.
-// Combine properly and finalize all time slots.
+// Here we have one big sorted TimeSlot array full of Occupied Slots.
+// They are sorted in Lowest StartTime order, but there may be overlapping.
+// There may be time slots where end time overlaps with other time slot.
+// Combine them properly into big chuncks of TimeSlots.
 void ArrangeSortedTimeSlots(vector<TimeSlot>* combined){
     if(combined->size() == 0) return;
     
@@ -115,7 +120,8 @@ bool TimeFitsInBound(Time start, Time end, int TimeInMinutes){
     return false;
 }
 
-// Using Daily Bounds and Occupied Slots, find all the Available Time Slots.
+// Using Daily Bounds, Occupied Slots, and MinTime, find all the Available Time Slots.
+// This is still linear time, (Number of Schedules of Person A) + (Number of Schedules of Person B).
 vector<TimeSlot>* FindAvailSlots(vector<TimeSlot> const* OccupiedSlots, TimeSlot const* DailyBound, const int MinTime){
     vector<TimeSlot>* AvailSlots = new vector<TimeSlot>();
     

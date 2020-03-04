@@ -69,7 +69,7 @@ vector<TimeSlot>* CombineSorted(vector<TimeSlot>& a, vector<TimeSlot>& b){
 }
 
 // Here we have one big sorted TimeSlot array full of Occupied Slots.
-// They are sorted in Lowest StartTime order, but there may be overlapping.
+// They are sorted in chronological StartTime order, but there may be overlapping.
 // There may be time slots where end time overlaps with other time slot.
 // Combine them properly into big chuncks of TimeSlots.
 void ArrangeSortedTimeSlots(vector<TimeSlot>* combined){

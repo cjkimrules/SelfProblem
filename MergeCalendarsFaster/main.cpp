@@ -100,8 +100,9 @@ void ArrangeSortedTimeSlots(vector<TimeSlot>* combined){
         }
     }
 
-    // release (free) combined data since we have already merged them.
-    // And return merged data with combined pointer where user expects it to be merged.
+    // Users expect the Merged Array to be stored in the input pointer "combined".
+    // When we assign "combined = Merged;", we will lose the pointer to the memory and we would have
+    // memory leak. Thus, release "combined" space (free) then assign.
     delete combined;
     combined = Merged;
 }

@@ -41,7 +41,7 @@ using namespace std;
  */
 
 
-// Here we combine to sorted TimeSlot arrays into one sorted array.
+// Here we combine two sorted TimeSlot arrays into one sorted array.
 // They are sorted by StartTime of each TimeSlot.
 vector<TimeSlot>* CombineSorted(vector<TimeSlot>& a, vector<TimeSlot>& b){
     vector<TimeSlot>* Combined = new vector<TimeSlot>();

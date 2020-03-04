@@ -42,6 +42,8 @@ TimeSlot::TimeSlot(Time const& start, Time const& end){
 
 Time TimeSlot::GetStartTime() const { return this->startTime; }
 Time TimeSlot::GetEndTime() const { return this->endTime; }
+void TimeSlot::SetStartTime(Time start){ this->startTime.SetTime(start.GetHour(), start.GetMinute()); }
+void TimeSlot::SetEndTime(Time end){ this->endTime.SetTime(end.GetHour(), end.GetMinute()); }
 
 string ConvertTimeToString(int h, int m){
     if(m < 10){

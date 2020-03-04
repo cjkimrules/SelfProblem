@@ -23,6 +23,8 @@ public:
     TimeSlot(string startTime, string endTime);
     Time GetStartTime() const;
     Time GetEndTime() const;
+    void SetStartTime(Time start);
+    void SetEndTime(Time end);
     string PrintStartTime() const;
     string PrintEndTime() const;
     int DurationInMinutes();

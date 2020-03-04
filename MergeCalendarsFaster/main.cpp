@@ -68,7 +68,44 @@ vector<TimeSlot>* CombineSorted(vector<TimeSlot>& a, vector<TimeSlot>& b){
 // There will be time slots where end time overlaps with other time slot.
 // Combine properly and finalize all time slots.
 void ArrangeSortedTimeSlots(vector<TimeSlot>* combined){
-    // NOT FINISHED
+    if(combined->size() == 0) return;
+    
+    // Since "combined" array is sorted, when we look at each time slot,
+    // it is guaranteed to have the only case where time slots merge,
+    // it is because next time slot's start time is in between time slot.
+
+    vector<TimeSlot>* Merged = new vector<TimeSlot>();
+    int MergedPointer = 0;
+
+    Merged->push_back(combined->at(0));
+
+    // We will loop through all elements in combined.
+    // Our task is to make sure when there is overlapping, we combine two time slots.
+    // If we have [10:00, 12:00] and [11:00, 13:00], then what we want is [10:00, 13:00].
+    // So we just have to make sure that starting Time (11:00) is in [10:00, 12:00] bounds.
+    // Since this is sorted, we do not have to check for ending Time.
+    for(int i = 1; i < combined->size(); i ++){
+        if(CheckTimeIsInBetween(Merged->at(MergedPointer).GetStartTime(), Merged->at(MergedPointer).GetEndTime(), combined->at(i).GetStartTime())){
+            // If starting Time was in bound, then extend the end Time accordingly.
+            Merged->at(MergedPointer).SetEndTime(GetMaxTime(Merged->at(MergedPointer).GetEndTime(), combined->at(i).GetEndTime()));
+        }else{
+            // If starting Time was NOT in bound, then we add this value separately to "Merged" and increment the Pointer.
+            Merged->push_back(combined->at(i));
+            MergedPointer ++;
+        }
+    }
+
+    // release (free) combined data since we have already merged them.
+    // And return merged data with combined pointer where user expects it to be merged.
+    delete combined;
+    combined = Merged;
+}
+
+bool CheckTimeIsInBetween(Time LowBound, Time HighBound, Time ToCheck){
+    if((ToCheck >= LowBound) && (ToCheck <= HighBound)){
+        return true;
+    }
+    return false;
 }
 
 bool TimeFitsInBound(Time start, Time end, int TimeInMinutes){
@@ -86,10 +123,8 @@ vector<TimeSlot>* FindAvailSlots(vector<TimeSlot> const* OccupiedSlots, TimeSlot
     // In case there may be no schedule for person A.
     if(OccupiedSlots->size() > 0){
         // Time between DailyBound and First Schedule's Starting Time.
-        if(DailyBound->GetStartTime() < OccupiedSlots->at(0).GetStartTime()){
-            if(TimeFitsInBound(DailyBound->GetStartTime(), OccupiedSlots->at(0).GetStartTime(), MinTime)){
-                AvailSlots->push_back(TimeSlot(DailyBound->GetStartTime(), OccupiedSlots->at(0).GetStartTime()));
-            }
+        if(TimeFitsInBound(DailyBound->GetStartTime(), OccupiedSlots->at(0).GetStartTime(), MinTime)){
+            AvailSlots->push_back(TimeSlot(DailyBound->GetStartTime(), OccupiedSlots->at(0).GetStartTime()));
         }
 
         // All Time Slots in between will be handled only with Occupied Slots, because we know
@@ -98,19 +133,14 @@ vector<TimeSlot>* FindAvailSlots(vector<TimeSlot> const* OccupiedSlots, TimeSlot
         for(int i = 0; i < OccupiedSlots->size() - 1; i ++){
             // If occupied slots are back to back which means if there is a schedule right after another,
             // we do not add 0 minutes as Available.
-            if(OccupiedSlots->at(i + 1).GetStartTime() > OccupiedSlots->at(i).GetEndTime()){
-                if(TimeFitsInBound(OccupiedSlots->at(i).GetEndTime(), OccupiedSlots->at(i + 1).GetStartTime(), MinTime)){
-                    AvailSlots->push_back(TimeSlot(OccupiedSlots->at(i).GetEndTime(), OccupiedSlots->at(i + 1).GetStartTime()));
-                }
-
+            if(TimeFitsInBound(OccupiedSlots->at(i).GetEndTime(), OccupiedSlots->at(i + 1).GetStartTime(), MinTime)){
+                AvailSlots->push_back(TimeSlot(OccupiedSlots->at(i).GetEndTime(), OccupiedSlots->at(i + 1).GetStartTime()));
             }
         }
 
         // Time between DailyBound and Last Schedule's Ending Time.
-        if(DailyBound->GetEndTime() > OccupiedSlots->at(OccupiedSlots->size() - 1).GetEndTime()){
-            if(TimeFitsInBound(OccupiedSlots->at(OccupiedSlots->size() - 1).GetEndTime(), DailyBound->GetEndTime(), MinTime)){
-                AvailSlots->push_back(TimeSlot(OccupiedSlots->at(OccupiedSlots->size() - 1).GetEndTime(), DailyBound->GetEndTime()));
-            }
+        if(TimeFitsInBound(OccupiedSlots->at(OccupiedSlots->size() - 1).GetEndTime(), DailyBound->GetEndTime(), MinTime)){
+            AvailSlots->push_back(TimeSlot(OccupiedSlots->at(OccupiedSlots->size() - 1).GetEndTime(), DailyBound->GetEndTime()));
         }
     }else{
         // If there was no occupied slots, which means person A has no schedule for this day.

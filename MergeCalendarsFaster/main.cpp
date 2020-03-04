@@ -1,6 +1,6 @@
 /******************************************************************************
 Author: CJ Kim
-Date: 3/2/2020
+Date: 3/3/2020
 Title: Merge Calendars Faster
 Explain: Imagine two people want to find a good time to have a meeting.
          They would like to find that good time slot by comparing both people's

@@ -9,12 +9,12 @@
 #
 
 class Rect:
-    TopLeftX = 0
-    TopLeftY = 0
-    BotRightX = 0
-    BotRightY = 0
+    TopLeftX = None
+    TopLeftY = None
+    BotRightX = None
+    BotRightY = None
 
-    def __init__(self, topX, topY, botX, botY):
+    def __init__(self, topX = 0, topY = 0, botX = 0, botY = 0):
         self.TopLeftX = topX
         self.TopLeftY = topY
         self.BotRightX = botX

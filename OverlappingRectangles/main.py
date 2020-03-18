@@ -2,7 +2,7 @@
 # Author: CJ Kim
 # Date: 3/18/2020
 # Title: Find the Area of Overlapping Rectangles
-# Explain: Input: [(0,4), (4,0)], [(4,8), (8,4)]
+# Explain: Input: [(0,5), (5,0)], [(4,8), (8,4)]
 #          Output: 1
 # Note: The coordinates are written in normal XY plane grid.
 #       The order is [(TopLeftX, TopLeftY), (BottomRightX, BottomRightY)]
